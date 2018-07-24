@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body id="C_columnSetList">
+<ul>
+    <li class="li01" onclick="C_columnSetTop(this)"><i></i>置顶</li>
+    <li class="li02" onclick="C_columnSetMoveUp(this)"><i></i>上移</li>
+    <li class="li03" onclick="C_columnSetMoveDown(this)"><i></i>下移</li>
+    <li class="li04" onclick="C_columnSetBottom(this)"><i></i>置底</li>
+    <li class="li05"><i></i>刷新</li>
+    <li class="li06" onclick="C_columnSetDel(this)"><i></i>删除</li>
+</ul>
+<table>
+    <thead>
+    <tr>
+        <th>列名</th>
+        <th>是否显示</th>
+    </tr>
+    </thead>
+    <tbody class="M_scrollBar">
+    <tr>
+        <td>客户状态1</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态2</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态3</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态4</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态5</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    <tr>
+        <td>客户状态</td>
+        <td><input type="checkbox" class="R_checkbox"><label></label></td>
+    </tr>
+    </tbody>
+</table>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    //居中弹框（列设置）删除
+    function C_columnSetDel(o){
+        var obj = $(o).parent().next('table').find("tbody tr.P_current");
+        if(obj.length > 0){
+            obj.hide();
+        }else {
+            alert('系统提示', '请选择要【删除】的列！');
+        }
+    }
+
+    //居中弹框（列设置）置底
+    function C_columnSetBottom(o){
+        var obj = $(o).parent().next('table').find("tbody tr.P_current");
+        var list = $(o).parent().next('table').find("tbody tr");
+        console.log(obj.length,list);
+        if(obj.length > 0){
+            var thisLocation = list.index( obj );
+            if( thisLocation >= list.length - 1 ){
+                alert('系统提示', '已移到最底端了！');
+            }else {
+                //console.log (thisLocation);
+                obj.parent().append(obj);   //移动到最底
+            }
+            //console.log (list.length);
+        }else {
+            alert('系统提示', '请选择要【置底】的列！');
+        }
+    }
+    //居中弹框（列设置）下移动
+    function C_columnSetMoveDown(o){
+        var obj = $(o).parent().next('table').find("tbody tr.P_current");
+        var list = $(o).parent().next('table').find("tbody tr");
+        if(obj.length > 0){
+            var thisLocation = list.index( obj );
+            if( thisLocation >= list.length - 1 ){
+                alert('系统提示', '已移到最底端了！');
+            }else {
+                //console.log (thisLocation);
+                obj.next().after(obj); //下移动
+            }
+            //console.log (list.length);
+        }else {
+            alert('系统提示', '请选择要【下移】的列！');
+        }
+    }
+
+    //居中弹框（列设置）置顶
+    function C_columnSetTop(o){
+        var obj = $(o).parent().next('table').find("tbody tr.P_current");
+        var list = $(o).parent().next('table').find("tbody tr");
+        if(obj.length > 0){
+            var thisLocation = list.index( obj );
+            if( thisLocation < 1 ){
+                alert('系统提示', '已移到最顶端了！');
+            }else {
+                console.log (thisLocation);
+                obj.parent().prepend(obj);  //移动到最顶
+            }
+        }else {
+            alert('系统提示', '请选择要【置顶】的列！');
+        }
+    }
+    //居中弹框（列设置）上移动
+    function C_columnSetMoveUp(o){
+        var obj = $(o).parent().next('table').find("tbody tr.P_current");
+        var list = $(o).parent().next('table').find("tbody tr");
+        if(obj.length > 0){
+            var thisLocation = list.index( obj );
+            if( thisLocation < 1 ){
+                alert('系统提示', '已移到最顶端了！');
+            }else {
+                //console.log (thisLocation);
+                obj.prev().before(obj); //上移动
+            }
+            //console.log (list.length);
+        }else {
+            alert('系统提示', '请选择要【上移】的列！');
+        }
+    }
+
+/*客户，列设置*/
+$(function(){
+    $("#C_columnSetList table tbody tr").on('click', function() {
+        if($(this).hasClass("P_current")){
+            $(this).removeClass("P_current");
+        }else {
+            $(this).addClass("P_current").siblings().removeClass("P_current");
+        }
+    });
+});
+</script>
+
+</body>
+</html>

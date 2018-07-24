@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    ul,li{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li{
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      background: pink;
+      border-bottom: 1px solid #4378fd;
+    }
+    .my-handle{
+      cursor: move!important;
+      cursor: -webkit-grabbing;
+    }
+    div{
+      height: 500px;
+      width: 100%;
+      color: red;
+      font-size: 18px;
+    }
+    ul{
+      height: 200px;
+      overflow: auto;
+      width: 500px;
+      margin: 0 auto;
+      border:2px solid #ccc;
+    }
+    .chosen{
+      color: #4378fd;
+      background: #fff;
+    }
+    .ghost{
+      color: #fff;
+      background-color: #c00;
+      height: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <ul id="simpleList">
+      <li class='my-handle'>1</li>
+      <li class='my-handle'>2</li>
+      <li class='my-handle'>3</li>
+      <li class='my-handle'>4</li>
+      <li class='my-handle'>5</li>
+    </ul>
+  </div>
+  <script src="./Sortable.min.js"></script>
+  <script>
+    (function () {
+    Sortable.create(simpleList, {
+      // 当前组的名称
+      group: 'shared',
+      // sorting inside list
+      sort: true,  
+      // 在移动多少个像素点之前取消这个拖拽事件
+      touchStartThreshold:0,
+      //Disables the sortable if set to true.
+      disabled: false,
+      // 移动元素动画时间
+      animation: 300,
+      // 给每个元素添加类名，如果不添加则不能选中
+      handle: ".my-handle",
+      // 占位元素的类名
+      ghostClass: "ghost",
+      // 选中item的类名
+      chosenClass: "chosen"
+  });
+	})();
+  </script>
+</body>
+</html>
